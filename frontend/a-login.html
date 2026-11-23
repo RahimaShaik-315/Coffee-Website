@@ -1,156 +1,211 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log In</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      padding-right: 5%;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
 
-    .background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-image: url('https://thumbs.dreamstime.com/z/coffee-mug-background-vector-illustration-copyspace-33949822.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: -1;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding-right: 5%;
+        }
 
-    .container {
-      padding: 30px;
-      width: 100%;
-      max-width: 400px;
-      color: rgb(22,17,15);
-    }
+        .background {
+            position: fixed;
+            inset: 0;
+            background-image: url('https://thumbs.dreamstime.com/z/coffee-mug-background-vector-illustration-copyspace-33949822.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
 
-    h1 {
-      text-align: left;
-      margin-bottom: 20px;
-    }
+        .container {
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            color: rgb(22, 17, 15);
+        }
 
-    form {
-      margin-top: 10px;
-    }
+        h1 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-    }
+        form {
+            margin-top: 10px;
+        }
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 2px solid #101010;
-      border-radius: 5px;
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      box-sizing: border-box;
-    }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
 
-    input::placeholder {
-      color: #faf5f5;
-    }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #101010;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            box-sizing: border-box;
+        }
 
-    input:focus {
-      border-color: #ff7b00;
-      outline: none;
-      box-shadow: 0 0 5px rgba(255, 123, 0, 0.5);
-    }
+        input::placeholder {
+            color: #faf5f5;
+        }
 
-    button {
-      background: linear-gradient(to right, #ff7b00, #ff4500);
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-      font-weight: bold;
-      font-size: 16px;
-      transition: 0.3s;
-    }
+        input:focus {
+            border-color: #ff7b00;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 123, 0, 0.5);
+        }
 
-    button:hover {
-      background: linear-gradient(to right, #ff4500, #ff7b00);
-    }
+        button {
+            background: linear-gradient(to right, #ff7b00, #ff4500);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+        }
 
-    p {
-      text-align: left;
-      margin-top: 15px;
-    }
+        button:hover {
+            background: linear-gradient(to right, #ff4500, #ff7b00);
+        }
 
-    a {
-      color: #ff7b00;
-      text-decoration: none;
-    }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
 
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+        p {
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        a {
+            color: #ff7b00;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #errorMessage {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="background"></div>
-  <div class="container">
-    <h1>Log In</h1>
-    <form id="loginForm">
-      <label for="name">Username:</label>
-      <input type="text" id="name" name="name" placeholder="Enter your username" required>
 
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+    <div class="background"></div>
 
-      <button type="submit">Log in</button>
-    </form>
-    <p>Don't have an account? <a href="Signup.html">Sign Up</a></p>
-  </div>
+    <div class="container">
 
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
+        <h1>Log In</h1>
 
-      const name = document.getElementById('name').value;
-      const password = document.getElementById('password').value;
+        <form id="loginForm">
 
-      try {
-        const response = await fetch('http://localhost:3001/login', {
-          method: 'POST',
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, password }),
+            <label for="name">Username:</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your username"
+                required
+            >
+
+            <label for="password">Password:</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit" id="loginButton">
+                Log in
+            </button>
+
+            <p id="errorMessage"></p>
+
+        </form>
+
+        <p>
+            Don't have an account?
+            <a href="/signup.html">Sign Up</a>
+        </p>
+
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const loginButton = document.getElementById('loginButton');
+        const errorMessage = document.getElementById('errorMessage');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const password = document.getElementById('password').value;
+
+            errorMessage.textContent = '';
+            loginButton.disabled = true;
+            loginButton.textContent = 'Logging in...';
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, password })
+                });
+
+                const result = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(
+                        result.message || 'Invalid username or password'
+                    );
+                }
+
+                alert('Login successful! Redirecting...');
+
+                window.location.href =
+                    result.redirectUrl || '/index.html';
+
+            } catch (error) {
+                console.error('Login error:', error);
+
+                errorMessage.textContent =
+                    error.message || 'Unable to connect to the server.';
+
+            } finally {
+                loginButton.disabled = false;
+                loginButton.textContent = 'Log in';
+            }
         });
+    </script>
 
-        const result = await response.json();
-        console.log('🟢 Server Response:', result);
-
-        if (response.ok) {
-          alert('✅ Login successful! Redirecting...');
-          window.location.href = result.redirectUrl || 'index.html';
-        } else {
-          alert(`❌ ${result.message || 'Login failed'}`);
-        }
-      } catch (error) {
-        alert('❌ Failed to connect to the server. Please check if backend is running.');
-        console.error(error);
-      }
-    });
-  </script>
 </body>
-
 </html>
